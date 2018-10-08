@@ -1,10 +1,12 @@
 package com.example.dominik.firstapp;
 
-import android.support.annotation.NonNull;
-
 import java.util.Random;
-
+/*
+pierwotna wersja generatora hasel
+ */
 public class Generator {
+    //sprawdza czy haslo jest wystarczajaco silne
+    //pierwotna wersja sprawdza tylko czy wsytepuje przynajmniej 1 mala litera, 1 duza i 1 cyfra
     private static boolean isStrong(String pass){
         boolean uppercase = false;
         boolean lowercase = false;
@@ -17,14 +19,9 @@ public class Generator {
         }
         return false;
     }
-    public static String generateStrongPassword(final int len){
-        String password = generatePassword(len);
-        while(!isStrong(password)){
-            password = generatePassword(len);
-        }
-        return password;
-    }
-    @NonNull
+
+    //Generujemy ciag liczb o zadanej dlugosci dopoki nie bedzie zgodny
+    //z kryteriami podanymi wyzej
     private static String generatePassword(final int len){
         Random randomizer = new Random();
         StringBuilder sb = new StringBuilder("");
@@ -44,5 +41,13 @@ public class Generator {
             sb.append(next);
         }
         return sb.toString();
+    }
+    //funkcja zbiera w grupe powyzsze
+    public static String generateStrongPassword(final int len){
+        String password = generatePassword(len);
+        while(!isStrong(password)){
+            password = generatePassword(len);
+        }
+        return password;
     }
 }
