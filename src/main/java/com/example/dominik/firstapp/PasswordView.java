@@ -10,12 +10,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-
+/*
+ekran z zapisanymi haslami
+ */
 public class PasswordView extends AppCompatActivity {
 
     private ListView myList;
     private ArrayList<DataPackage> packageList;
+    //hasla wczytane z listy pakietow uzyte do ListView
     private String[] website;
+    //flaga mowiaca o tym czy mamy plik z haslami
     private boolean gotPackages = false;
 
     private void setClickList(){
@@ -29,6 +33,7 @@ public class PasswordView extends AppCompatActivity {
             }
         });
     }
+    //sprawdzamy tutaj czy mamy plik z haslami i go wczytujemy
     private void getPackages(){
      packageList = DataPackage.getPackages(getApplicationContext());
      if(packageList != null){
@@ -37,6 +42,7 @@ public class PasswordView extends AppCompatActivity {
      DataPackage[] temp = packageList.toArray(new DataPackage[packageList.size()]);
      website = DataPackage.getWebsiteArray(temp);
     }
+    //ustawienie elementow zalezne od tego czy istenieje plik z haslami
     private void setElements(){
         getPackages();
         if(gotPackages) {
@@ -57,9 +63,10 @@ public class PasswordView extends AppCompatActivity {
         setElements();
     }
 
+    //jesli nacisniemy do tylu to idziemy do ekranu poczatkowego "main activity"
     @Override
     public void onBackPressed(){
-        Intent next = new Intent(getApplicationContext(),ThirdActivity.class);
+        Intent next = new Intent(getApplicationContext(),MainActivity.class);
         startActivity(next);
     }
 }
